@@ -1,0 +1,28 @@
+name: Integración continua angular
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  push_to_master:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build the angular project on container
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install
+    - run: npm run build
+    - name: Build the Docker image
+      uses: docker/build-push-action@v1
+      with:
+        username: julian0122
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: angular/project-julian
+        tags: latest
