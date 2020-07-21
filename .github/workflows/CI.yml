@@ -21,6 +21,6 @@ jobs:
     - uses: docker/build-push-action@v1
       with:
         username: julian0122
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        password: JcBc2040
         repository: angular/project-julian
         tags: latest
