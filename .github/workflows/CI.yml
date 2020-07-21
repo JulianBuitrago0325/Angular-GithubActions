@@ -23,5 +23,5 @@ jobs:
       with:
         username: julian0122
         password: JcBc2040
-        repository: angular
+        repository: julian0122/angular
         tags: latest
