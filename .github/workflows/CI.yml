@@ -21,7 +21,7 @@ jobs:
     - run: npm test
     - uses: docker/build-push-action@v1
       with:
-        username: julian0122
-        password: JcBc2040
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
         repository: julian0122/angular
         tags: latest
