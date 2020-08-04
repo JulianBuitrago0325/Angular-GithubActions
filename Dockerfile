@@ -1,6 +1,5 @@
 FROM nginx:mainline-alpine
 RUN rm -rf /usr/share/nginx/html/*
-COPY default.conf /etc/nginx/conf.d/
 COPY dist/project-test/ /usr/share/nginx/html/
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 RUN chgrp -R root /var/cache/nginx
