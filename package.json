@@ -7,8 +7,7 @@
     "build": "ng build --prod",
     "test": "ng test --watch=false --browsers=ChromeHeadlessPuppeteer",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "install": "ng serve --o 8080"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
