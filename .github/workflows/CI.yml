@@ -25,10 +25,10 @@ jobs:
     - name: Iniciar pruebas unitarias
       run: npm test
     - name: Iniciar pruebas de código estatico con sonarQube
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      uses: kitabisa/sonarqube-action@master
+      with:
+        host: ${{ secrets.SONAR_HOST }}
+        login: ${{ secrets.SONAR_TOKEN }}
     - name: Construcción del artefacto y enrutarmiento con nginx
       uses: docker/build-push-action@v1
       with:
