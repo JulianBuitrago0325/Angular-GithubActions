@@ -21,7 +21,7 @@ jobs:
     - name: Instalar paquetes del proyecto
       run: npm install
     - name: Construir ejecutable "dist"
-      run: npm build
+      run: npm run-script build
     - name: Iniciar pruebas unitarias
       run: npm test
     - name: Iniciar pruebas de código estatico con sonarQube
