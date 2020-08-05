@@ -39,7 +39,7 @@ jobs:
     - name: Crear zip
       uses: montudor/action-zip@v0.1.0
       with:
-        args: zip -qq -r dist/project-test.zip dist/project-test
+        args: zip -qq -r dist.zip dist
     - run: ls dist/
     - name: Publicar artefacto en nexus
       uses: sonatype-nexus-community/nexus-repo-github-action@master
@@ -50,5 +50,5 @@ jobs:
         format: raw
         repository: github-actions-angular
         coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
-        assets: /
-        filename: dist
+        assets: extension=zip
+        filename: dist.zip
