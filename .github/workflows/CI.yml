@@ -29,6 +29,7 @@ jobs:
       with:
         host: ${{ secrets.SONAR_HOST }}
         login: ${{ secrets.SONAR_TOKEN }}
+    - run: ls
     - name: Construcción del artefacto y enrutarmiento con nginx
       uses: docker/build-push-action@v1
       with:
