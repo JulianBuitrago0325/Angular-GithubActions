@@ -36,6 +36,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: julian0122/angular
         tags: latest
+    - name: Crear zip
+      uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r dist/project-test.zip dist/project-test
     - name: Publicar artefacto en nexus
       uses: sonatype-nexus-community/nexus-repo-github-action@master
       with:
@@ -45,5 +49,5 @@ jobs:
         format: npm
         repository: github-actions-angular
         coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
-        assets: extension=js
-        filename: dist/project-test/
+        assets: extension=zip
+        filename: dist/project-test.zip
