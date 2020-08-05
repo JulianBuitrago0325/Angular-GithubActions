@@ -47,7 +47,7 @@ jobs:
         serverUrl: http://nexus.everisdigital.com/
         username: ${{ secrets.NEXUS_USER }}
         password: ${{ secrets.NEXUS_PASSWORD }}
-        format: zip
+        format: raw
         repository: github-actions-angular
         coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
         assets: extension=zip
