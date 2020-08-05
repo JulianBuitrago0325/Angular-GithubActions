@@ -40,13 +40,14 @@ jobs:
       uses: montudor/action-zip@v0.1.0
       with:
         args: zip -qq -r dist/project-test.zip dist/project-test
+    - run: ls dist/
     - name: Publicar artefacto en nexus
       uses: sonatype-nexus-community/nexus-repo-github-action@master
       with:
         serverUrl: http://nexus.everisdigital.com/
         username: ${{ secrets.NEXUS_USER }}
         password: ${{ secrets.NEXUS_PASSWORD }}
-        format: npm
+        format: zip
         repository: github-actions-angular
         coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
         assets: extension=zip
