@@ -50,5 +50,5 @@ jobs:
         format: raw
         repository: github-actions-angular
         coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
-        assets: extension=zip
-        filename: dist/project-test.zip
+        assets: /
+        filename: dist
