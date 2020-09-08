@@ -7,4 +7,4 @@ jobs:
   jobCreation:
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'Hola ${{ github.event.inputs.name }}'
+    - run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
