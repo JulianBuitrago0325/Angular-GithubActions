@@ -12,6 +12,7 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
+    - name: Mostrar rama
       run: echo '${{ steps.extract_branch.outputs.branch }}'
     - name: Acceder a jira
       uses: atlassian/gajira-login@master
