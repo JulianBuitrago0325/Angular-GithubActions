@@ -23,7 +23,7 @@ jobs:
     - name: Jira TODO
       uses: atlassian/gajira-todo@master
       with:
-        project: GA
+        project: github-actions
         issuetype: Task
         description: ${{ steps.extract_branch.outputs.branch }}
       env:
