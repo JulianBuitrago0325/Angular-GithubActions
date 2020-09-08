@@ -1,0 +1,21 @@
+name: Paso a desarrollo
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+
+  jobDevelop:
+
+    runs-on:
+    
+    steps:
+
+    - name: Extraer nombre de la rama
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
+    - name: Mostrar rama
+      run: echo '${{ steps.extract_branch.outputs.branch }}'

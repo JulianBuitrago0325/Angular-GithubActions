@@ -41,14 +41,14 @@ jobs:
       with:
         args: zip -qq -r dist.zip dist
     - run: ls
-    - name: Publicar artefacto en nexus
-      uses: sonatype-nexus-community/nexus-repo-github-action@master
-      with:
-        serverUrl: http://nexus.everisdigital.com/
-        username: ${{ secrets.NEXUS_USER }}
-        password: ${{ secrets.NEXUS_PASSWORD }}
-        format: raw
-        repository: front-angular
-        coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
-        assets: extension=zip
-        filename: dist.zip
+    #- name: Publicar artefacto en nexus
+    #  uses: sonatype-nexus-community/nexus-repo-github-action@master
+    #  with:
+    #    serverUrl: http://nexus.everisdigital.com/
+    #    username: ${{ secrets.NEXUS_USER }}
+    #    password: ${{ secrets.NEXUS_PASSWORD }}
+    #    format: raw
+    #    repository: front-angular
+    #    coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
+    #    assets: extension=zip
+    #    filename: dist.zip

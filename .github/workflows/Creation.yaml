@@ -4,22 +4,28 @@ on:
   create
 
 jobs:
+
   jobCreation:
+
     runs-on: ubuntu-latest
     name: Creación de rama
     steps:
+
     - name: Extraer nombre de la rama
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
+
     - name: Mostrar rama
       run: echo '${{ steps.extract_branch.outputs.branch }}'
+
     - name: Acceder a jira
       uses: atlassian/gajira-login@master
       env:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
     - name: Crear Issue
       id: create
       uses: atlassian/gajira-create@master
@@ -30,6 +36,7 @@ jobs:
           Task ${{ steps.extract_branch.outputs.branch }}
         description: |
           Starting this task
+
     - name: Pasar a In Progress
       uses: atlassian/gajira-transition@master
       with:
