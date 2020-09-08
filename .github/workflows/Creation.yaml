@@ -1,4 +1,4 @@
-name: Creación de ramas
+name: Creación de rama
 
 on:
   create
@@ -6,9 +6,24 @@ on:
 jobs:
   jobCreation:
     runs-on: ubuntu-latest
+    name: Creación de rama
     steps:
-    - name: Extract branch name
+    - name: Extraer nombre de la rama
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - run: echo '${{ steps.extract_branch.outputs.branch }}'
+      run: echo '${{ steps.extract_branch.outputs.branch }}'
+    - name: Acceder a jira
+      uses: atlassian/gajira-login@master
+      env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+    - name: Jira TODO
+      uses: atlassian/gajira-todo@master
+      with:
+        project: GA
+        issuetype: Task
+        description: Created automatically via GitHub Actions
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
