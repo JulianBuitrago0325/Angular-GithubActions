@@ -7,4 +7,4 @@ jobs:
   jobCreation:
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'Hola'
+    - run: echo 'Hola ${{ github.event.inputs.name }}'
