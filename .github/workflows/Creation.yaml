@@ -1,0 +1,7 @@
+name: Creación de ramas
+
+on:
+  create
+
+jobs:
+  - run: echo 'Hola'
