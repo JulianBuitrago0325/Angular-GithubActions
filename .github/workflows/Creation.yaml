@@ -30,3 +30,8 @@ jobs:
           Task ${{ steps.extract_branch.outputs.branch }}
         description: |
           Starting this task
+    - name: Pasar a In Progress
+      uses: atlassian/gajira-transition@master
+      with:
+        issue: ${{ steps.create.outputs.issue }}
+        transition: "In progress"
