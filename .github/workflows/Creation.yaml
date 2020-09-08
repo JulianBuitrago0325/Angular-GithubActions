@@ -4,4 +4,7 @@ on:
   create
 
 jobs:
-  - run: echo 'Hola'
+  jobCreation:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 'Hola'
