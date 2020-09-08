@@ -1,24 +1,11 @@
-# base image
-FROM node:12.2.0
-
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
-
-# set working directory
-WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@9.1.11
-
-# add app
-COPY . /app
-
-# start app
-CMD ng serve --host 0.0.0.0
+FROM nginx:mainline-alpine
+RUN rm -rf /usr/share/nginx/html/*
+ADD dist/project-test/ /usr/share/nginx/html/
+RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
+RUN chgrp -R root /var/cache/nginx
+RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+RUN addgroup nginx root
+# --- Expose and CMD ---
+EXPOSE 8080
+#CMD gunicorn --bind 0.0.0.0:5000 wsgi --chdir /usr/share/nginx/html/ & nginx -g "daemon off;"
+CMD ["nginx", "-g", "daemon off;"]

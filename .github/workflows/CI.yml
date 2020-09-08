@@ -12,16 +12,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - name: Inicio de pipeline
+      uses: actions/checkout@v2
+    - name: Instalar node como gestor de paquetería
+      uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: npm install
-    - run: npm build
-    - run: npm test
-    - uses: docker/build-push-action@v1
+    - name: Instalar paquetes del proyecto
+      run: npm install
+    - name: Construir ejecutable "dist"
+      run: npm run-script build
+    - name: Iniciar pruebas unitarias
+      run: npm test
+    - name: Iniciar pruebas de código estatico con sonarQube
+      uses: kitabisa/sonarqube-action@master
       with:
-        username: julian0122
-        password: JcBc2040
+        host: ${{ secrets.SONAR_HOST }}
+        login: ${{ secrets.SONAR_TOKEN }}
+    - name: Construcción del artefacto y enrutarmiento con nginx
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
         repository: julian0122/angular
         tags: latest
+    - name: Crear zip
+      uses: montudor/action-zip@v0.1.0
+      with:
+        args: zip -qq -r dist.zip dist
+    - run: ls
+    - name: Publicar artefacto en nexus
+      uses: sonatype-nexus-community/nexus-repo-github-action@master
+      with:
+        serverUrl: http://nexus.everisdigital.com/
+        username: ${{ secrets.NEXUS_USER }}
+        password: ${{ secrets.NEXUS_PASSWORD }}
+        format: raw
+        repository: front-angular
+        coordinates: groupId=com.github.actions artifactId=angular version=1.0.0
+        assets: extension=zip
+        filename: dist.zip
