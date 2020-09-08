@@ -24,6 +24,6 @@ jobs:
       with:
         project: GA
         issuetype: Task
-        description: Created automatically via GitHub Actions
+        description: ${{ steps.extract_branch.outputs.branch }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
