@@ -20,11 +20,13 @@ jobs:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-    - name: Jira TODO
-      uses: atlassian/gajira-todo@master
+    - name: Crear Issue
+      id: create
+      uses: ./atlassian/gajira-create@master
       with:
-        project: github-actions
+        project: GA
         issuetype: Task
-        description: ${{ steps.extract_branch.outputs.branch }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        summary: |
+          Task ${{ steps.extract_branch.outputs.branch }}
+        description: |
+          Starting this task
